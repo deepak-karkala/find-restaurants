@@ -4,5 +4,23 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap-theme.min.css.map')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css.map')
   body
-    block content
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand(href='/') Restaurants Near Me
+        #navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/about/') About
+
+    .container
+      block content
+
+    script(src='/javascripts/jquery-1.11.1.min.js')
+    script(src='/bootstrap/js/bootstrap.min.js')
+    

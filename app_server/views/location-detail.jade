@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  .row.page-header
+    .col-lg-12
+      h1 Starmeal
+  .row
+    .col-xs-12.col-md-9
+      p 123 First Street, Neverland 123456        
+   
+  .row
+    .col-xs-12.col-sm-6
+      .panel.panel-primary.review-panel
+        .panel-heading
+          a.btn.btn-default.pull-right(href='/location/review/new') Add review
+            h2.panel-title Customer reviews
+        .panel-body.review-container
+          .row
+            .review
+              .well.well-sm.review-header
+                span.reviewAuthor Deepak1
+              .col-xs-12
+                    p Nice place, highly recommended.
+          .row
+            .review
+              .well.well-sm.review-header
+                span.reviewAuthor Deepak2
+              .col-xs-12
+                    p Nice place, highly recommended.
+     .col-xs-12.col-sm-6.location-map
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Location on Map
+        .panel-body
+          img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=51.45,-0.969&zoom=15&size=400x350&sensor=false&markers=51.45,-0.969')
+
+    .col-xs-12.col-md-3
+      p.lead Come visit us and enjoy the service
+      p. If you have visited us, kindly leave a review here.                        
+                 
+
