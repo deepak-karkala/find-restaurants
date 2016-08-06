@@ -8,7 +8,7 @@ var reviewSchema = new mongoose.Schema({
 var locationSchema = new mongoose.Schema({
 	name: {type: String, required: true},
 	address: String,
-	coords: {type: [Number], index: '2dshpere'},
+	coords: {type: [Number], index: '2dshpere', required: true},
 	reviews: [reviewSchema]
 });
 
