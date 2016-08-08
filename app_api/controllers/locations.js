@@ -35,7 +35,7 @@ module.exports.locationsListByDistance = function (req,res) {
 		maxDistance: theEarth.getRadsFromDistance(20),
 		num: 10
 	};
-	if (!lng || !lat || !maxDistance) {
+	if (!lng || !lat || !(geoOptions.maxDistance)) {
 	    console.log('locationsListByDistance missing params');
 	    sendJSONresponse(res, 404, {
 	      "message": "lng, lat and maxDistance query parameters are all required"
