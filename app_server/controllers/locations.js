@@ -5,7 +5,7 @@ var apiOptions = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  //apiOptions.server = "https://protected-waters-29134.herokuapp.com/";
+  apiOptions.server = "https://protected-waters-29134.herokuapp.com/";
 }
 
 var renderHomePage = function(req, res, respnseBody){
@@ -36,7 +36,7 @@ module.exports.list = function(req, res){
   };
   request(
     requestOptions,function(err,response,body){
-      console.log(body)
+      //console.log(body)
       renderHomePage(req, res, body);
     });
 };
