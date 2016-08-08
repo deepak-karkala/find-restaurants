@@ -1,42 +1,33 @@
 extends layout
 
 block content
-  .row.page-header
-    .col-lg-12
+  .row.page-header: .col-lg-12
       h1= pageHeader.title
   .row
     .col-xs-12.col-md-9
-      p= location.address
-   
-  .row
-    .col-xs-12.col-sm-6
-      .panel.panel-primary.review-panel
-        .panel-heading
-          a.btn.btn-default.pull-right(href='/location/review/new') Add review
-            h2.panel-title Customer reviews
-        .panel-body.review-container
-          each review in location.reviews
-            .row
-              .review
-                .well.well-sm.review-header
-                  span.reviewAuthor Deepak1
-                .col-xs-12
-                    p !{ (review.reviewText).replace(/\n/g, '<br/>')}
-          .row
-            .review
-              .well.well-sm.review-header
-                span.reviewAuthor Deepak2
-              .col-xs-12
-                    p Nice place, highly recommended.
-     .col-xs-12.col-sm-6.location-map
-      .panel.panel-primary
-        .panel-heading
-          h2.panel-title Location on Map
-        .panel-body
-          img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=15&size=400x350&sensor=false&markers=#{location.coords.lat},#{location.coords.lng}&scale=2")
-
+      .row
+        .col-xs-12.col-sm-6
+          p= location.address
+        .col-xs-12.col-sm-6.location-map
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Location map
+            .panel-body  
+              img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCnpM1Yn3V_GyQ4ZGZYnyeNPUvyxdq7SDg&center=#{location.coords.lat},#{location.coords.lng}&zoom=15&size=100x50&sensor=false&markers=#{location.coords.lat},#{location.coords.lng}&scale=2")   
+      .row
+        .col-xs-12
+          .panel.panel-primary.review-panel
+            .panel-heading
+              a.btn.btn-default.pull-right(href="/location/#{location._id}/reviews/new") Add review
+              h2.panel-title Customer reviews
+            .panel-body.review-container
+              each review in location.reviews
+                .row
+                  .review
+                    .well.well-sm.review-header
+                      span.reviewAuthor #{review.author}
+                    .col-xs-12
+                      p !{(review.reviewText).replace(/\n/g, '<br/>')}
     .col-xs-12.col-md-3
-      p.lead Come visit us and enjoy the service
-      p. If you have visited us, kindly leave a review here.                        
-                 
-
+      p.lead #{location.name} #{sidebar.context}
+      p #{sidebar.callToAction}                      
