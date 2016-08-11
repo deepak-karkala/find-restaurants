@@ -39,9 +39,11 @@ module.exports.list = function(req, res){
     method : "GET",
     json : {},
     qs : {
-      lng : 6.5657,
-      lat : 46.5198,
-      maxDistance : 1000000
+      lng : 6.5668,
+      lat : 46.5191,
+      //lng : 6.5657,
+      //lat : 46.5198,
+      maxDistance : 100
     }
   };
   request(
