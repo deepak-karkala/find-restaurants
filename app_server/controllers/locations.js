@@ -41,16 +41,15 @@ module.exports.list = function(req, res){
     qs : {
       lng : 6.5668,
       lat : 46.5191,
-      //lng : 6.5657,
-      //lat : 46.5198,
       maxDistance : 100
     }
   };
   request(
     requestOptions,function(err,response,body){
-      console.log(body)
+      //console.log(body)
       renderHomePage(req, res, body);
     });
+
 };
 
 

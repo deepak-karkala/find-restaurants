@@ -44,6 +44,19 @@ module.exports.locationsListByDistance = function(req, res) {
     });
     return;
   }
+
+  Rnm.find().exec(function(err, results, stats) {
+    var locations;
+    if (err) {
+      console.log('Error:', err);
+      sendJSONresponse(res, 404, err);
+    } else {
+      locations = buildLocationList(req, res, results, stats);
+      sendJSONresponse(res, 200, locations);
+    }
+  });
+
+/*
   Rnm.geoNear(point, geoOptions, function(err, results, stats) {
     var locations;
     console.log('Geo Results', results);
@@ -52,26 +65,30 @@ module.exports.locationsListByDistance = function(req, res) {
       console.log('geoNear error:', err);
       sendJSONresponse(res, 404, err);
     } else {
+      var results = Rnm.db.collection('locations').find();
       locations = buildLocationList(req, res, results, stats);
       sendJSONresponse(res, 200, locations);
     }
   });
+*/
 };
+
 
 var buildLocationList = function(req, res, results, stats) {
   var locations = [];
   results.forEach(function(doc) {
     locations.push({
-      distance: theEarth.getDistanceFromRads(doc.dis),
-      name: doc.obj.name,
-      address: doc.obj.address,
-      rating: doc.obj.rating,
-      facilities: doc.obj.facilities,
-      _id: doc.obj._id
+      //distance: theEarth.getDistanceFromRads(doc.dis),
+      "name": doc.name,
+      "address": doc.address,
+      //rating: doc.rating,
+      //facilities: doc.facilities,
+      "_id": doc._id
     });
   });
   return locations;
 };
+
 
 /* GET a location by the id */
 module.exports.locationsReadOne = function(req, res) {
