@@ -9,15 +9,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 var renderHomePage = function(req, res, responseBody){
-  var message;
-  if (!(responseBody instanceof Array)) {
-    message = "API lookup error";
-    responseBody = [];
-  } else {
-    if (!responseBody.length) {
-      message = "No nearby places found"
-    }
-  }
   res.render('locations-list', { 
     title: 'Restaurants Near Me',
     pageHeader:{
@@ -25,31 +16,14 @@ var renderHomePage = function(req, res, responseBody){
       strapline: 'Find nearby restaurants'
     },
     sidebar: "Looking for a place to have a sumptuous meal ? Restaurants Near Me helps you locate the restaurants close to you.",
-    locations: responseBody
+    //locations: responseBody
     //message: message
   });
 };
 
 /* GET 'home' page */
 module.exports.list = function(req, res){
-  var requestOptions, path;
-  path = '/api/locations';
-  requestOptions = {
-    url : apiOptions.server + path,
-    method : "GET",
-    json : {},
-    qs : {
-      lng : 6.5668,
-      lat : 46.5191,
-      maxDistance : 100
-    }
-  };
-  request(
-    requestOptions,function(err,response,body){
-      //console.log(body)
-      renderHomePage(req, res, body);
-    });
-
+  renderHomePage(req, res);
 };
 
 
@@ -99,7 +73,9 @@ module.exports.detail = function(req, res){
 var renderReviewForm = function (req,res,locd) {
   res.render('location-review', {
     title: 'Review' + locd.name,
-    pageHeader: { title: 'Review' + locd.name}   
+    pageHeader: { title: 'Review' + locd.name},
+    error: req.query.err,
+    url: req.originalUrl   
   });
 };
 

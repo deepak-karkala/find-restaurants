@@ -23,6 +23,7 @@ body {
 .panel-body.review-container {padding-top: 0;}
 .review-header {margin-bottom: 10px;}
 
+#filter {margin-left: 4px;}
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
