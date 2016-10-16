@@ -64,7 +64,7 @@ module.exports.locationsListByDistance = function(req, res) {
     });
   }
 
-  var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCnpM1Yn3V_GyQ4ZGZYnyeNPUvyxdq7SDg&'
+  var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=&'
           + 'location=' + lat + ',' + lng + '&radius=2000&type=restaurant&keyword=wifi';
   http.get(url, callback).end();
   
