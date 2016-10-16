@@ -15,7 +15,7 @@ block content
       .row.list-group
         .col-xs-12.list-group-item(ng-repeat="location in data.locations | filter: textFilter")
           h4
-            a(href="/location/{{ location._id }}") {{ location.name }}
+            {{ location.name }}
           p.address {{ location.address }}
     .col-xs-12.col-sm-4
       p.lead= sidebar           

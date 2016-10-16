@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Rnm = mongoose.model('Location');
+var http = require('https');
 
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
@@ -45,6 +46,43 @@ module.exports.locationsListByDistance = function(req, res) {
     return;
   }
 
+  callback = function(response) {
+    var str = '';
+
+    response.on('data', function (chunk) {
+      str += chunk;
+    });
+
+    response.on('end', function () {
+      //console.log(str);
+      var parsed = JSON.parse(str);
+      list = parsed.results;
+      var num_results = Math.min(list.length,5)
+      locations = buildLocationList(req, res, list.slice(0,num_results));
+      sendJSONresponse(res, 200, locations);
+
+    });
+  }
+
+  var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCnpM1Yn3V_GyQ4ZGZYnyeNPUvyxdq7SDg&'
+          + 'location=' + lat + ',' + lng + '&radius=2000&type=restaurant&keyword=wifi';
+  http.get(url, callback).end();
+  
+
+  var buildLocationList = function(req, res, results) {
+    var locations = [];
+
+    for(i=0;i<results.length;i++){
+      locations.push({
+        "name": results[i].name,
+        "address": results[i].vicinity
+      });
+    };
+    return locations;
+  };
+
+
+  /*
   Rnm.find().exec(function(err, results, stats) {
     var locations;
     if (err) {
@@ -55,6 +93,7 @@ module.exports.locationsListByDistance = function(req, res) {
       sendJSONresponse(res, 200, locations);
     }
   });
+  */
 
 /*
   Rnm.geoNear(point, geoOptions, function(err, results, stats) {
@@ -73,7 +112,7 @@ module.exports.locationsListByDistance = function(req, res) {
 */
 };
 
-
+/*
 var buildLocationList = function(req, res, results, stats) {
   var locations = [];
   results.forEach(function(doc) {
@@ -88,7 +127,7 @@ var buildLocationList = function(req, res, results, stats) {
   });
   return locations;
 };
-
+*/
 
 /* GET a location by the id */
 module.exports.locationsReadOne = function(req, res) {
